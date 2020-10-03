@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class TicTakToeMain {
 	private static final Scanner SC = new Scanner(System.in);
 	static char[] board = new char[10];
+	static int index;
+	static char letter;
 
 	// UC-1 Creating method CreateBoard
 	private static char[] createBoard() {
@@ -34,11 +36,19 @@ public class TicTakToeMain {
 	// UC-4 Ability to user to make a move
 	private static void getUserMove(char[] board, Scanner userInput) {
 		System.out.println("What is your Next Move? (1-9)");
-		int index = userInput.nextInt();
+		index = userInput.nextInt();
+		System.out.println("Enter the Letter:");
+		letter = userInput.next().charAt(0);
+	}
+
+	//	UC-5 Ability to check if space is free And then make move
+	private static void makeMove(char[] board, int index, char letter) {
 		if (board[index] == ' ') {
 			System.out.println("Enter the Letter:");
-			board[index] = userInput.next().charAt(0);
+			board[index] = letter;
 			displayBoard(board);
+		} else {
+			System.out.println("The position is not free! Please try again");
 		}
 	}
 
@@ -55,5 +65,7 @@ public class TicTakToeMain {
 		displayBoard(board);
 
 		getUserMove(board, SC);
+		
+		makeMove(board, index, letter);
 	}
 }
