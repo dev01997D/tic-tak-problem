@@ -4,6 +4,14 @@ import java.util.Scanner;
 
 public class TicTakToeMain {
 	private static final Scanner SC = new Scanner(System.in);
+	// contants
+	public static final int HEAD = 0;
+	public static final int TAIL = 1;
+
+	public static enum Player {
+		USER, COMPUTER
+	}
+
 	static char[] board = new char[10];
 	static int index;
 	static char letter;
@@ -41,7 +49,7 @@ public class TicTakToeMain {
 		letter = userInput.next().charAt(0);
 	}
 
-	//	UC-5 Ability to check if space is free And then make move
+	// UC-5 Ability to check if space is free And then make move
 	private static void makeMove(char[] board, int index, char letter) {
 		if (board[index] == ' ') {
 			System.out.println("Enter the Letter:");
@@ -50,6 +58,12 @@ public class TicTakToeMain {
 		} else {
 			System.out.println("The position is not free! Please try again");
 		}
+	}
+
+	// UC-7 Ability to check who starts the game first
+	public static Player getWhoPlayFirst() {
+		int toss = (int) (Math.floor(Math.random() * 10) % 2);
+		return (toss == HEAD) ? Player.USER : Player.COMPUTER;
 	}
 
 	public static void main(String[] args) {
@@ -65,7 +79,10 @@ public class TicTakToeMain {
 		displayBoard(board);
 
 		getUserMove(board, SC);
-		
+
 		makeMove(board, index, letter);
+
+		Player player = getWhoPlayFirst();
+		System.out.println("Game will be started by : " + player);
 	}
 }
