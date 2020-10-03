@@ -31,7 +31,7 @@ public class TicTakToeMain {
 		System.out.println("\n" + board[7] + " | " + board[8] + " | " + board[9]);
 	}
 
-	//UC-4 Ability to user to make a move
+	// UC-4 Ability to user to make a move
 	private static void getUserMove(char[] board, Scanner userInput) {
 		System.out.println("What is your Next Move? (1-9)");
 		int index = userInput.nextInt();
