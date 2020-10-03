@@ -60,10 +60,18 @@ public class TicTakToeMain {
 		}
 	}
 
-	// UC-7 Ability to check who starts the game first
+	// UC-6 Ability to check who starts the game first
 	public static Player getWhoPlayFirst() {
 		int toss = (int) (Math.floor(Math.random() * 10) % 2);
 		return (toss == HEAD) ? Player.USER : Player.COMPUTER;
+	}
+
+	// UC-7 Ability to check if Someone Won
+	public static boolean isWinner(char[] b, char ch) {
+		return ((b[1] == ch && b[2] == ch && b[3] == ch) || (b[4] == ch && b[5] == ch && b[6] == ch)
+				|| (b[7] == ch && b[8] == ch && b[9] == ch) || (b[1] == ch && b[4] == ch && b[7] == ch)
+				|| (b[2] == ch && b[5] == ch && b[8] == ch) || (b[3] == ch && b[6] == ch && b[9] == ch)
+				|| (b[1] == ch && b[5] == ch && b[9] == ch) || (b[3] == ch && b[5] == ch && b[7] == ch));
 	}
 
 	public static void main(String[] args) {
@@ -84,5 +92,8 @@ public class TicTakToeMain {
 
 		Player player = getWhoPlayFirst();
 		System.out.println("Game will be started by : " + player);
+
+		boolean winChecker = isWinner(board, letter);
+		System.out.println("Check if Won :" + winChecker);
 	}
 }
