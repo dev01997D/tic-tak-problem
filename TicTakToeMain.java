@@ -22,27 +22,38 @@ public class TicTakToeMain {
 		return userInput.next().toUpperCase().charAt(0);
 	}
 
-        //UC-3 Method to print the Board
+	// UC-3 Method to print the Board
 	private static void displayBoard(char[] board) {
-		System.out.println("\n"+board[1]+" | "+board[2]+" | "+board[3]);
+		System.out.println("\n" + board[1] + " | " + board[2] + " | " + board[3]);
 		System.out.println("_________");
-		System.out.println("\n"+board[4]+" | "+board[5]+" | "+board[6]);
+		System.out.println("\n" + board[4] + " | " + board[5] + " | " + board[6]);
 		System.out.println("_________");
-		System.out.println("\n"+board[7]+" | "+board[8]+" | "+board[9]);
+		System.out.println("\n" + board[7] + " | " + board[8] + " | " + board[9]);
+	}
+
+	//UC-4 Ability to user to make a move
+	private static void getUserMove(char[] board, Scanner userInput) {
+		System.out.println("What is your Next Move? (1-9)");
+		int index = userInput.nextInt();
+		if (board[index] == ' ') {
+			System.out.println("Enter the Letter:");
+			board[index] = userInput.next().charAt(0);
+			displayBoard(board);
+		}
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic Tak Toe game");
-		// Creating object of class
-		TicTakToeMain ticObj = new TicTakToeMain();
 
 		// Invoking Methods
-		board = ticObj.createBoard();
+		board = createBoard();
 
 		char userLetter = chooseUserLetter(SC);
 		char computerLetter = (userLetter == 'X') ? 'O' : 'X';
 		System.out.println(computerLetter);
-		
+
 		displayBoard(board);
+
+		getUserMove(board, SC);
 	}
 }
