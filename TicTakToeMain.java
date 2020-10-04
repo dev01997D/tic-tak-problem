@@ -91,7 +91,7 @@ public class TicTakToeMain {
 			return false;
 	}
 
-	// UC-8 Smart move by computer on its turn
+	// UC-8 & UC-9 Smart move by computer on its turn
 	public static int smartMoveByComputer(char[] b, char cLetter, char uLetter) {
 		int flag = 0;
 		String line1 = uLetter + "" + uLetter + "";
