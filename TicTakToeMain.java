@@ -91,7 +91,7 @@ public class TicTakToeMain {
 			return false;
 	}
 
-	// UC-8 Smart move by computer on its turn
+	// UC-8 & UC-9 Smart move by computer on its turn
 	public static int smartMoveByComputer(char[] b, char cLetter, char uLetter) {
 		int flag = 0;
 		String line1 = uLetter + "" + uLetter + "";
@@ -182,15 +182,36 @@ public class TicTakToeMain {
 		}
 		if (flag == 1)
 			displayBoard(b);
+		return flag;
+	}
+
+	// UC-10
+	public static void smartMoveByPcIfNoOneIsWinning() {
+		System.out.println();
+		int flag = smartMoveByComputer(board, compLetter, userLetter);
 		while (flag != 1) {
 			int position = (int) (Math.floor(Math.random() * 10) % 9);
-			if (b[position] == ' ') {
-				board[position] = cLetter;
-				displayBoard(board);
+			if (board[3] == ' ') {
+				board[3] = compLetter;
 				flag = 1;
+			} else if (board[1] == ' ') {
+				board[1] = compLetter;
+				flag = 1;
+			} else if (board[9] == ' ') {
+				board[9] = compLetter;
+				flag = 1;
+			} else if (board[7] == ' ') {
+				board[7] = compLetter;
+				flag = 1;
+			} else {
+				if (board[position] == ' ') {
+					board[position] = compLetter;
+					flag = 1;
+				} else
+					flag = 0;
 			}
+			displayBoard(board);
 		}
-		return flag;
 	}
 
 	public static void main(String[] args) {
@@ -208,10 +229,11 @@ public class TicTakToeMain {
 
 		displayBoard(board);
 		makeUserMove(board, userLetter);
-
+		
+		smartMoveByPcIfNoOneIsWinning();
+		
 		boolean winChecker = isWinner(board, userLetter, compLetter);
 		if (winChecker == false)
 			System.out.println("None has won game, Please enter next move");
-		int flag = smartMoveByComputer(board, compLetter, userLetter);
 	}
 }
