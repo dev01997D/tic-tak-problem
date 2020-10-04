@@ -185,7 +185,7 @@ public class TicTakToeMain {
 		return flag;
 	}
 
-	// UC-10
+	// UC-10:Ability to take corners & UC-11: Ability to take center and any other position subsequently
 	public static void smartMoveByPcIfNoOneIsWinning() {
 		System.out.println();
 		int flag = smartMoveByComputer(board, compLetter, userLetter);
@@ -202,6 +202,9 @@ public class TicTakToeMain {
 				flag = 1;
 			} else if (board[7] == ' ') {
 				board[7] = compLetter;
+				flag = 1;
+			} else if (board[5] == ' ') {
+				board[5] = compLetter;
 				flag = 1;
 			} else {
 				if (board[position] == ' ') {
@@ -229,9 +232,9 @@ public class TicTakToeMain {
 
 		displayBoard(board);
 		makeUserMove(board, userLetter);
-		
+
 		smartMoveByPcIfNoOneIsWinning();
-		
+
 		boolean winChecker = isWinner(board, userLetter, compLetter);
 		if (winChecker == false)
 			System.out.println("None has won game, Please enter next move");
