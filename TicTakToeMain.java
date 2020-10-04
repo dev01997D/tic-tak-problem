@@ -185,7 +185,8 @@ public class TicTakToeMain {
 		return flag;
 	}
 
-	// UC-10:Ability to take corners & UC-11: Ability to take center and any other position subsequently
+	// UC-10:Ability to take corners & UC-11: Ability to take center and any other
+	// position subsequently
 	public static void smartMoveByPcIfNoOneIsWinning() {
 		System.out.println();
 		int flag = smartMoveByComputer(board, compLetter, userLetter);
@@ -217,6 +218,50 @@ public class TicTakToeMain {
 		}
 	}
 
+	// UC-12: Game continues until win or draw happen
+	public static void playTillGameWinOrOver() {
+		boolean winCheck = false;
+		int i = 1;
+		while (winCheck == false && i < 9) {
+			System.out.println();
+			switch (i) {
+			case 1:
+				makeUserMove(board, userLetter);
+				break;
+			case 2:
+				smartMoveByPcIfNoOneIsWinning();
+				break;
+			case 3:
+				makeUserMove(board, userLetter);
+				break;
+			case 4:
+				smartMoveByPcIfNoOneIsWinning();
+				break;
+			case 5:
+				makeUserMove(board, userLetter);
+				break;
+			case 6:
+				smartMoveByPcIfNoOneIsWinning();
+				break;
+			case 7:
+				makeUserMove(board, userLetter);
+				break;
+			case 8:
+				smartMoveByPcIfNoOneIsWinning();
+				break;
+			default:
+				makeUserMove(board, userLetter);
+				break;
+			}
+			i++;
+			winCheck = isWinner(board, compLetter, userLetter);
+			if (winCheck == false)
+				System.out.println("None has won game, Please enter next move");
+			if (i > 8 && winCheck == false)
+				System.out.println("Draw Occurs");
+		}
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tic Tak Toe game");
 
@@ -231,12 +276,6 @@ public class TicTakToeMain {
 		System.out.println("Computer letter is : " + compLetter);
 
 		displayBoard(board);
-		makeUserMove(board, userLetter);
-
-		smartMoveByPcIfNoOneIsWinning();
-
-		boolean winChecker = isWinner(board, userLetter, compLetter);
-		if (winChecker == false)
-			System.out.println("None has won game, Please enter next move");
+		playTillGameWinOrOver();
 	}
 }
