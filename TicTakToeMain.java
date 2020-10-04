@@ -192,23 +192,23 @@ public class TicTakToeMain {
 		int flag = smartMoveByComputer(board, compLetter, userLetter);
 		while (flag != 1) {
 			int position = (int) (Math.floor(Math.random() * 10) % 9);
-			if (board[3] == ' ') {
-				board[3] = compLetter;
-				flag = 1;
-			} else if (board[1] == ' ') {
+			if (board[1] == ' ') {
 				board[1] = compLetter;
 				flag = 1;
-			} else if (board[9] == ' ') {
-				board[9] = compLetter;
-				flag = 1;
-			} else if (board[7] == ' ') {
-				board[7] = compLetter;
+			} else if (board[3] == ' ') {
+				board[3] = compLetter;
 				flag = 1;
 			} else if (board[5] == ' ') {
 				board[5] = compLetter;
 				flag = 1;
+			} else if (board[7] == ' ') {
+				board[7] = compLetter;
+				flag = 1;
+			} else if (board[9] == ' ') {
+				board[9] = compLetter;
+				flag = 1;
 			} else {
-				if (board[position] == ' ') {
+				if (position>0 && board[position] == ' ') {
 					board[position] = compLetter;
 					flag = 1;
 				} else
@@ -222,7 +222,7 @@ public class TicTakToeMain {
 	public static void playTillGameWinOrOver() {
 		boolean winCheck = false;
 		int i = 1;
-		while (winCheck == false && i < 9) {
+		while (winCheck == false && i <= 9) {
 			System.out.println();
 			switch (i) {
 			case 1:
@@ -257,8 +257,25 @@ public class TicTakToeMain {
 			winCheck = isWinner(board, compLetter, userLetter);
 			if (winCheck == false)
 				System.out.println("None has won game, Please enter next move");
-			if (i > 8 && winCheck == false)
+			if (i > 9 && winCheck == false)
 				System.out.println("Draw Occurs");
+		}
+	}
+
+	// uc-13 Play another game
+	public static void playAnotherGame() {
+		System.out.println("Do you want to play Another new Game");
+		char reply = SC.next().charAt(0);
+		if ((reply + "").equalsIgnoreCase("Y")) {
+			board = createBoard();
+			userLetter = chooseUserLetter(SC);
+			compLetter = (userLetter == 'X') ? 'O' : 'X';
+			System.out.println("Computer letter is : " + compLetter);
+			displayBoard(board);
+			playTillGameWinOrOver();
+		} else {
+			System.out.println("Thank you!");
+			System.exit(0);
 		}
 	}
 
@@ -277,5 +294,7 @@ public class TicTakToeMain {
 
 		displayBoard(board);
 		playTillGameWinOrOver();
+		
+		playAnotherGame();
 	}
 }
